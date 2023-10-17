@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  async-server:
+    build: .
+    ports:
+      - "3031:3000"

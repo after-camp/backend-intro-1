@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api1
+      - api2
+
+  api1:
+    build:
+      context: ./node-api
+      dockerfile: Dockerfile.node
+    expose:
+      - "3000"
+
+  api2:
+    build:
+      context: ./flask-api
+      dockerfile: Dockerfile.flask
+    expose:
+      - "5000"

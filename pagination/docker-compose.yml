@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  web:
+    image: "python:3.8"
+    volumes:
+      - "./app:/app"
+    working_dir: /app
+    command: bash -c "pip install -r requirements.txt && python app.py"
+    ports:
+      - "3001:5000"
+    depends_on:
+      - db
+  db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pagination_demo
+    ports:
+      - "5433:5432"
